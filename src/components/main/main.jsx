@@ -40,7 +40,6 @@ const Main = ({}) => {
                         'Sign': md5('GET' + urlForMethod + "books" + localStorage.getItem('secret')),
                     }
                 })
-                console.log(res.data.data)
                 if (isMounted) {
                     setData([...res.data.data])
                 }
@@ -68,7 +67,6 @@ const Main = ({}) => {
                     'Sign': md5('POST' + urlForMethod + "books" + JSON.stringify({"isbn": `${isbnForCreateBook}`}) + localStorage.getItem('secret')),
                 }
             })
-            console.log(res)
             let obj = {
                 book: res.data.data,
                 status: 0
@@ -95,7 +93,6 @@ const Main = ({}) => {
                     'Sign': md5('DELETE' + urlForMethod + `books/` + id + localStorage.getItem('secret')),
                 }
             })
-            console.log(res)
             AlertFunction('success',`${res.data.message}`)
             setData([...res.data.data])
         } catch (e) {
@@ -141,7 +138,6 @@ const Main = ({}) => {
             })
             setData(books)
             AlertFunction('success',`${res.data.message}`)
-            console.log(res)
         } catch (e) {
             console.log(e)
             AlertFunction('error',`${e.response.data.data.message}`)

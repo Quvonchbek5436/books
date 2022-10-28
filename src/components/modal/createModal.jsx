@@ -19,7 +19,6 @@ const style = {
 };
 
 const CreateModal = ({open, setOpenCreateModal, createNewBook, setIsbnForCreateBook}) => {
-    console.log('create')
     return (
         <>
             <Modal

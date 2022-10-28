@@ -10,14 +10,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
-import {memo, useEffect, useState} from 'react';
-import {axiosInstanceAnotherData, axiosLogin, urlForMethod} from "../config";
+import {memo, useState} from 'react';
+import { axiosLogin, urlForMethod} from "../config";
 import md5 from "md5";
 
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Mualliflik huquqi © '}
+            {'Copyright © '}
             <Link color="inherit" href="#">
                 Jovliyev Quvonchbek
             </Link>{' '}
@@ -37,16 +37,6 @@ const Login = ({}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-
-        console.log(md5('GET' + urlForMethod + "myself" + JSON.stringify({
-            "key": data.get('key'),
-            "secret": data.get('secret')
-        }) + data.get('secret')))
-        console.log('GET' + urlForMethod + "myself" + JSON.stringify({
-            "key": data.get('key'),
-            "secret": data.get('secret')
-        }) + data.get('secret'))
-
         try {
             const res = await axiosLogin.get('myself', {
                 headers: {
@@ -54,13 +44,12 @@ const Login = ({}) => {
                     Sign: md5('GET' + urlForMethod + "myself" + data.get('secret')),
                 }
             })
-            console.log(res)
             localStorage.setItem('key', res.data.data.key)
             localStorage.setItem('secret', res.data.data.secret)
             navigate('/Books')
         } catch (e) {
             console.log(e);
-            // console.log('Taqdim etilgan hisob ma’lumotlari bilan tizimga kirib bo‘lmadi.');
+            setError(true)
         }
     };
 
@@ -96,7 +85,7 @@ const Login = ({}) => {
                             <LockOutlinedIcon/>
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Kirish
+                            Login
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}} style={{width: "90%"}}>
                             <TextField
@@ -104,9 +93,8 @@ const Login = ({}) => {
                                 required
                                 fullWidth
                                 id="username"
-                                label="Kalit"
+                                label="Key"
                                 name="key"
-                                // autoComplete="text"
                                 autoFocus
                             />
                             <TextField
@@ -114,16 +102,15 @@ const Login = ({}) => {
                                 required
                                 fullWidth
                                 id="username"
-                                label="Sir"
+                                label="Secret"
                                 name="secret"
-                                // autoComplete="text"
                                 autoFocus
                             />
 
 
                             {error && <Typography component="p" variant="p"
                                                   style={{textAlign: 'center', marginTop: "12px", color: "#dc3545"}}>
-                                Taqdim etilgan hisob ma’lumotlari bilan tizimga kirib bo‘lmadi.
+                                Could not sign in with the provided credentials.
                             </Typography>}
 
                             <Button
@@ -132,18 +119,18 @@ const Login = ({}) => {
                                 variant="contained"
                                 sx={{mt: 3, mb: 2}}
                             >
-                                Kirish
+                                Login
                             </Button>
                             <Grid container
                                   style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                                 <Grid item>
                                     <Link href="#" variant="body2">
-                                        Kalit so'zini unitdingizmi?
+                                        Forgot your password?
                                     </Link>
                                 </Grid>
                                 <Grid item>
                                     <Link href="#" variant="body2" onClick={() => navigate('/sign_up')}>
-                                        Hisobingiz yo'qmi? Ro'yxatdan o'tish
+                                        Don't have an account? Sign up
                                     </Link>
                                 </Grid>
                             </Grid>

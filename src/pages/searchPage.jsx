@@ -27,7 +27,6 @@ const SearchPage = () => {
     //search books
     const searchBook = async () => {
         setIsLoading(true)
-        console.log('GET' + urlForMethod + "books/" + searchString + localStorage.getItem('secret'))
         try {
             const res = await axiosInstanceAnotherData.get('books/' + searchString, {
                 headers: {
@@ -37,7 +36,6 @@ const SearchPage = () => {
             })
             setSearchString('')
             setSearchData([...res.data.data])
-            console.log(res)
             setIsLoading(false)
             AlertFunction('success', `${res.data.message}`)
         } catch (e) {

@@ -1,11 +1,7 @@
 import React, {memo} from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import {ButtonBase} from '@mui/material';
 import styled from 'styled-components';
 import Box from "@mui/material/Box";
@@ -40,10 +36,6 @@ const SearchCardForBook = ({book}) => {
                         Isbn:{book?.isbn}
                     </Typography>
                 </CardContent>
-                {/*<CardActions sx={{ justifyContent: 'space-between', px:2 }}>*/}
-                {/*    <Button sx={{ width: '50%' }} variant="outlined" color={'primary'} onClick={() => setOpen({ open: true, obj: book })}><EditIcon /></Button>*/}
-                {/*    <Button sx={{ width: '50%' }} variant="outlined" color={'error'} onClick={() => setOpenDeleteModal({ open: true, id: book.book?.id })}><DeleteIcon /></Button>*/}
-                {/*</CardActions>*/}
             </Card>
 
         </>

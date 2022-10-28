@@ -21,8 +21,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import {memo, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
-import {AccountCircle} from "@mui/icons-material";
-import {Menu, MenuItem} from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth = 240;
@@ -53,7 +51,6 @@ const DrawerHeader = styled('div')(({theme}) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
 }));
 
@@ -97,13 +94,6 @@ const MiniDrawer = ({children}) => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
 
     const exitThisSite = () => {
         localStorage.removeItem('key')
@@ -119,7 +109,7 @@ const MiniDrawer = ({children}) => {
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={handleDrawerOpen}
+                        onClick={()=>setOpen(true)}
                         edge="start"
                         sx={{
                             marginRight: 5,
@@ -148,7 +138,7 @@ const MiniDrawer = ({children}) => {
             </AppBar>
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={()=> setOpen(false)}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                     </IconButton>
                 </DrawerHeader>

@@ -11,13 +11,12 @@ import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
 import {memo, useState} from 'react';
-import {axiosSignUp, urlForMethod} from "../config";
-import md5 from "md5";
+import {axiosSignUp} from "../config";
 
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Mualliflik huquqi © '}
+            {'Copyright © '}
             <Link color="inherit" href="#">
                 Jovliyev Quvonchbek
             </Link>{' '}
@@ -45,15 +44,7 @@ const SignUp = ({}) => {
             secret: data.get('secret')
         })
         try {
-            const res = await axiosSignUp.post('signup', body, {
-                // headers: {
-                // "Access-Control-Allow-Origin": "*"
-                //         Key: data.get('key'),
-                //         Sign: md5('POST' + urlForMethod + "signup" + `{"name": ${data.get('name')},"email": ${data.get('email')}, "key": ${data.get('key')}, "secret": ${data.get('secret')} }` +data.get('secret')),
-                //     }
-            })
-            console.log(res)
-
+            await axiosSignUp.post('signup', body)
             navigate("/login")
         } catch (e) {
             console.log(e);
@@ -93,7 +84,7 @@ const SignUp = ({}) => {
                             <LockOutlinedIcon/>
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Ro'yxatdan o'tish
+                            Sign Up
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}} style={{width: "90%"}}>
                             <TextField
@@ -101,7 +92,7 @@ const SignUp = ({}) => {
                                 required
                                 fullWidth
                                 id="name"
-                                label="Ism"
+                                label="Name"
                                 name="name"
                                 autoComplete="name"
                                 autoFocus
@@ -121,7 +112,7 @@ const SignUp = ({}) => {
                                 required
                                 fullWidth
                                 name="key"
-                                label="Kalit"
+                                label="Key"
                                 type="text"
                                 id="key"
                                 autoComplete="current-password"
@@ -131,7 +122,7 @@ const SignUp = ({}) => {
                                 required
                                 fullWidth
                                 name="secret"
-                                label="Sir"
+                                label="Secret"
                                 type="text"
                                 id="secret"
                                 autoComplete="current-password"
@@ -139,7 +130,7 @@ const SignUp = ({}) => {
 
                             {error && <Typography component="p" variant="p"
                                                   style={{textAlign: 'center', marginTop: "12px", color: "#dc3545"}}>
-                                Taqdim etilgan hisob ma’lumotlari bilan tizimga kirib bo‘lmadi.
+                                Could not sign in with the provided credentials.
                             </Typography>}
 
                             <Button
@@ -148,18 +139,18 @@ const SignUp = ({}) => {
                                 variant="contained"
                                 sx={{mt: 3, mb: 2}}
                             >
-                                Ro'yxatdan o'tish
+                                Sign Up
                             </Button>
                             <Grid container
                                   style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                                 <Grid item>
                                     <Link href="#" variant="body2">
-                                        Kalit so'zini unitdingizmi?
+                                        Forgot your password?
                                     </Link>
                                 </Grid>
                                 <Grid item>
                                     <Link to="" variant="body2" onClick={() => navigate('/login')}>
-                                        Hisobingiz bormi? Kirish
+                                        Do you have an account? Enter
                                     </Link>
                                 </Grid>
                             </Grid>

@@ -20,7 +20,6 @@ const style = {
 };
 
 const deleteModal = ({open, deleteBook, setOpenDeleteModal}) => {
-    console.log('delete')
     return (
         <>
             <Modal

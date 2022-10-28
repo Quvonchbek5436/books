@@ -26,7 +26,6 @@ const ModalEditBooks = ({
                             editBook,
                             setStatusForEditBook
                         }) => {
-    console.log('edit')
     const handleClose = () => {
         setOpen(false);
     };
