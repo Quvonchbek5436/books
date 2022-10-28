@@ -5,7 +5,7 @@ const AlertAll = ({openAlert,setOpenAlert}) => {
     return (
         <>
             <Collapse in={openAlert.open}
-                      sx={{position: 'absolute', top: '200px', left: '100px', right: '100px', zIndex: 999}}>
+                      sx={{position: 'fixed', top: '200px', left: '100px', right: '100px', zIndex: 999}}>
                 <Alert severity={openAlert?.severityStr}
                        action={
                            <IconButton
